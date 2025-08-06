@@ -1,5 +1,7 @@
 # Democratic Commands
 
+![Logo](logo.png)
+
 > A Minecraft Forge mod that brings democracy to server administration! Non-OP players can propose OP commands that are voted on by all online players.
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-green.svg)](https://www.minecraft.net/)
