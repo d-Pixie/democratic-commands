@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="democraticcommands"
+version="1.0.0"
+displayName="Democratic Commands"
+authors="d-pixie"
+description="Vote on operator commands democratically"
+
+# Add this line to specify the mixin config
+[[mods.democraticcommands]]
+displayName="Democratic Commands"
+config="democraticcommands.mixins.json"
+
+[[dependencies.democraticcommands]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.democraticcommands]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"

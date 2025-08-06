@@ -1,0 +1,61 @@
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# VS Code
+.vscode/
+.code-workspace
+
+# Minecraft
+run/
+runs/
+server/
+logs/
+crash-reports/
+saves/
+screenshots/
+config/
+mods/
+world/
+usercache.json
+usernamecache.json
+
+# Forge MDK
+CREDITS-fml.txt
+LICENSE-fml.txt
+README.txt
+forge-*-changelog.txt
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# Backup files
+*.bak
+*.backup
+*~
+*.swp
+*.tmp
+
+# Local configuration
+local.properties
