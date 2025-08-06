@@ -239,38 +239,32 @@ public class DemocraticCommandsMod {
         public static void onRegisterCommands(RegisterCommandsEvent event) {
             CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
             
-            // Override suggestions for existing OP commands to make them visible to non-OPs
-            for (String opCommand : opCommands) {
-                // Find the existing command node
-                var commandNode = dispatcher.getRoot().getChild(opCommand);
-                if (commandNode != null) {
-                    // Create a new command that mimics the original but with modified requirement
-                    dispatcher.register(Commands.literal(opCommand)
-                        .requires(source -> true)  // Allow everyone to see it
-                        .redirect(commandNode));    // Redirect to original command logic
-                }
-            }
-            
-            // Register vote initiation command with autocomplete suggestions
+            // Register /vote with subcommands
             dispatcher.register(Commands.literal("vote")
                 .requires(source -> true)  // Anyone can use this
-                .then(Commands.argument("command", StringArgumentType.greedyString())
-                    .suggests(OP_COMMAND_SUGGESTIONS)  // Add real command suggestions
-                    .executes(context -> initiateVote(context))));
-            
-            // Register voting commands - NO PERMISSION REQUIRED
-            dispatcher.register(Commands.literal("yes")
-                .requires(source -> true)  // Anyone can vote
-                .executes(context -> castVote(context, true)));
-            
-            dispatcher.register(Commands.literal("no")
-                .requires(source -> true)  // Anyone can vote
-                .executes(context -> castVote(context, false)));
-            
-            // Register vote status command - NO PERMISSION REQUIRED
-            dispatcher.register(Commands.literal("votestatus")
-                .requires(source -> true)  // Anyone can check status
-                .executes(context -> showVoteStatus(context)));
+                
+                // /vote yes
+                .then(Commands.literal("yes")
+                    .executes(context -> castVote(context, true)))
+                
+                // /vote no
+                .then(Commands.literal("no")
+                    .executes(context -> castVote(context, false)))
+                
+                // /vote status
+                .then(Commands.literal("status")
+                    .executes(context -> showVoteStatus(context)))
+                
+                // Default: show help if just /vote is typed
+                .executes(context -> {
+                    CommandSourceStack source = context.getSource();
+                    source.sendSystemMessage(Component.literal("§6Democratic Commands - Vote System"));
+                    source.sendSystemMessage(Component.literal("§e/vote yes §7- Vote yes on the current proposal"));
+                    source.sendSystemMessage(Component.literal("§e/vote no §7- Vote no on the current proposal"));
+                    source.sendSystemMessage(Component.literal("§e/vote status §7- Check current vote status"));
+                    source.sendSystemMessage(Component.literal("§7Just type any OP command to start a vote!"));
+                    return 1;
+                }));
         }
         
         @SubscribeEvent
